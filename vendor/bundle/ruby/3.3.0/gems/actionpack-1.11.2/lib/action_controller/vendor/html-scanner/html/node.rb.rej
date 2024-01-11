@@ -1,0 +1,17 @@
+***************
+*** 264,270 ****
+    
+    # A CDATA node is simply a text node with a specialized way of displaying
+    # itself.
+-   class CDATA < Text
+      def to_s
+        "<![CDATA[#{super}]>"
+      end
+--- 264,270 ----
+    
+    # A CDATA node is simply a text node with a specialized way of displaying
+    # itself.
++   class CDATA < Text #:nodoc:
+      def to_s
+        "<![CDATA[#{super}]>"
+      end
