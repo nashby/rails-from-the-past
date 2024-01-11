@@ -99,10 +99,14 @@ begin
         private
         def simplified_type(field_type)
           case field_type
-          when /char/i                          : :string
-          when /num|float|double|dec|real|int/i : @scale == 0 ? :integer : :float
-          when /date|time/i                     : @name =~ /_at$/ ? :time : :datetime
-          when /lob/i                           : :binary
+          when /char/i
+            :string
+          when /num|float|double|dec|real|int/i
+            @scale == 0 ? :integer : :float
+          when /date|time/i
+            @name =~ /_at$/ ? :time : :datetime
+          when /lob/i
+            :binary
           end
         end
 
@@ -497,9 +501,12 @@ begin
       alias :define_a_column_pre_ar :define_a_column
       def define_a_column(i)
         case do_ocicall(@ctx) { @parms[i - 1].attrGet(OCI_ATTR_DATA_TYPE) }
-        when 8    : @stmt.defineByPos(i, String, 65535) # Read LONG values
-        when 187  : @stmt.defineByPos(i, OraDate) # Read TIMESTAMP values
-        else define_a_column_pre_ar i
+        when 8
+          @stmt.defineByPos(i, String, 65535) # Read LONG values
+        when 187
+          @stmt.defineByPos(i, OraDate) # Read TIMESTAMP values
+        else
+          define_a_column_pre_ar i
         end
       end
     end
