@@ -19,6 +19,7 @@ GEM
       activesupport (= 1.2.5)
       rake (>= 0.6.2)
     rake (13.1.0)
+    webrick (1.8.1)
 
 PLATFORMS
   arm64-darwin-23
@@ -26,6 +27,7 @@ PLATFORMS
 
 DEPENDENCIES
   rails (= 1.0.0)
+  webrick
 
 BUNDLED WITH
    2.5.3
