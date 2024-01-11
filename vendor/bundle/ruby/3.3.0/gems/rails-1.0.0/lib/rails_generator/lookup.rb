@@ -132,7 +132,7 @@ module Rails
         private
           # Lookup and cache every generator from the source list.
           def cache
-            @cache ||= sources.inject([]) { |cache, source| cache + source.map }
+            @cache ||= sources.inject([]) { |cache, source| cache + Array(source) }
           end
 
           # Clear the cache whenever the source list changes.
