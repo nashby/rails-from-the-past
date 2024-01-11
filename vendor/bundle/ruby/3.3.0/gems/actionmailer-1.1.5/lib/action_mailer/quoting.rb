@@ -19,7 +19,7 @@ module ActionMailer
     # A quick-and-dirty regexp for determining whether a string contains any
     # characters that need escaping.
     if !defined?(CHARS_NEEDING_QUOTING)
-      CHARS_NEEDING_QUOTING = /[\000-\011\013\014\016-\037\177-\377]/
+      CHARS_NEEDING_QUOTING = /[\x00-\x11\x13\x14\x16-\x1F\x7F-\xFF]/n
     end
 
     # Quote the given text if it contains any "illegal" characters
