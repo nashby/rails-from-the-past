@@ -75,7 +75,7 @@ module ActionController #:nodoc:
           return unless perform_caching
 
           benchmark "Expired page: #{page_cache_file(path)}" do
-            File.delete(page_cache_path(path)) if File.exists?(page_cache_path(path))
+            File.delete(page_cache_path(path)) if File.exist?(page_cache_path(path))
           end
         end
         
@@ -441,7 +441,7 @@ module ActionController #:nodoc:
           end
         
           def ensure_cache_path(path)
-            FileUtils.makedirs(path) unless File.exists?(path)
+            FileUtils.makedirs(path) unless File.exist?(path)
           end
 
           def search_dir(dir, &callback)

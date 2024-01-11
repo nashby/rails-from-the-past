@@ -61,7 +61,7 @@ module ActionView
         options = sources.last.is_a?(Hash) ? sources.pop.stringify_keys : { }
         if sources.first == :defaults
           sources = @@javascript_default_sources.dup
-          if defined?(RAILS_ROOT) and File.exists?("#{RAILS_ROOT}/public/javascripts/application.js")
+          if defined?(RAILS_ROOT) and File.exist?("#{RAILS_ROOT}/public/javascripts/application.js")
             sources << 'application' 
           end
         end

@@ -14,7 +14,7 @@ module Tags
   PROJECT_DIR = ['.']
 
   RVM_GEMDIR = File.join(`rvm gemdir`.strip, "gems") rescue nil
-  SYSTEM_DIRS = RVM_GEMDIR && File.exists?(RVM_GEMDIR) ? RVM_GEMDIR : []
+  SYSTEM_DIRS = RVM_GEMDIR && File.exist?(RVM_GEMDIR) ? RVM_GEMDIR : []
 
   module_function
 

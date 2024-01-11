@@ -5,7 +5,7 @@ def recent_tests(source_pattern, test_path, touched_since = 10.minutes.ago)
   FileList[source_pattern].map do |path|
     if File.mtime(path) > touched_since
       test = "#{test_path}/#{File.basename(path, '.rb')}_test.rb"
-      test if File.exists?(test)
+      test if File.exist?(test)
     end
   end.compact
 end
