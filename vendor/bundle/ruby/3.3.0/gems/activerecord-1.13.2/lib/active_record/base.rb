@@ -1588,10 +1588,14 @@ module ActiveRecord #:nodoc:
 
       def convert_number_column_value(value)
         case value
-          when FalseClass: 0
-          when TrueClass:  1
-          when '':         nil
-          else value
+          when FalseClass
+            0
+          when TrueClass
+            1
+          when ''
+            nil
+          else
+            value
         end
       end
 
