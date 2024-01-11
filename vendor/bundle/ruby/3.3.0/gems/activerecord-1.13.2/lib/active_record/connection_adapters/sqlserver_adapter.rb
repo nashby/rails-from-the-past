@@ -89,11 +89,7 @@ module ActiveRecord
 
       def cast_to_time(value)
         return value if value.is_a?(Time)
-        time_array = ParseDate.parsedate(value)
-        time_array[0] ||= 2000
-        time_array[1] ||= 1
-        time_array[2] ||= 1
-        Time.send(Base.default_timezone, *time_array) rescue nil
+        DateTime.parse(value) rescue nil
       end
 
       def cast_to_datetime(value)
