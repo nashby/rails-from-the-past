@@ -1,9 +1,9 @@
-require 'singleton' 
+require 'singleton'
 
 # The Inflector transforms words from singular to plural, class names to table names, modularized class names to ones without,
 # and class names to foreign keys. The default inflections for pluralization, singularization, and uncountable words are kept
 # in inflections.rb.
-module Inflector 
+module Inflector
   # A singleton instance of this class is yielded by Inflector.inflections, which can then be used to specify additional
   # inflection rules. Examples:
   #
@@ -21,20 +21,20 @@ module Inflector
   # already have been loaded.
   class Inflections
     include Singleton
-    
+
     attr_reader :plurals, :singulars, :uncountables
-    
+
     def initialize
       @plurals, @singulars, @uncountables = [], [], []
     end
-    
-    # Specifies a new pluralization rule and its replacement. The rule can either be a string or a regular expression. 
+
+    # Specifies a new pluralization rule and its replacement. The rule can either be a string or a regular expression.
     # The replacement should always be a string that may include references to the matched data from the rule.
     def plural(rule, replacement)
       @plurals.insert(0, [rule, replacement])
     end
-    
-    # Specifies a new singularization rule and its replacement. The rule can either be a string or a regular expression. 
+
+    # Specifies a new singularization rule and its replacement. The rule can either be a string or a regular expression.
     # The replacement should always be a string that may include references to the matched data from the rule.
     def singular(rule, replacement)
       @singulars.insert(0, [rule, replacement])
@@ -42,7 +42,7 @@ module Inflector
 
     # Specifies a new irregular that applies to both pluralization and singularization at the same time. This can only be used
     # for strings, not regular expressions. You simply pass the irregular in singular and plural form.
-    # 
+    #
     # Examples:
     #   irregular 'octopus', 'octopi'
     #   irregular 'person', 'people'
@@ -50,9 +50,9 @@ module Inflector
       plural(Regexp.new("(#{singular[0,1]})#{singular[1..-1]}$", "i"), '\1' + plural[1..-1])
       singular(Regexp.new("(#{plural[0,1]})#{plural[1..-1]}$", "i"), '\1' + singular[1..-1])
     end
-    
+
     # Add uncountable words that shouldn't be attempted inflected.
-    # 
+    #
     # Examples:
     #   uncountable "money"
     #   uncountable "money", "information"
@@ -60,7 +60,7 @@ module Inflector
     def uncountable(*words)
       (@uncountables << words).flatten!
     end
-    
+
     # Clears the loaded inflections within a given scope (default is :all). Give the scope as a symbol of the inflection type,
     # the options are: :plurals, :singulars, :uncountables
     #
@@ -116,7 +116,7 @@ module Inflector
   def titleize(word)
     humanize(underscore(word)).gsub(/\b([a-z])/) { $1.capitalize }
   end
-  
+
   def underscore(camel_cased_word)
     camel_cased_word.to_s.gsub(/::/, '/').gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').gsub(/([a-z\d])([A-Z])/,'\1_\2').downcase
   end
@@ -132,7 +132,7 @@ module Inflector
   def tableize(class_name)
     pluralize(underscore(class_name))
   end
-  
+
   def classify(table_name)
     camelize(singularize(table_name))
   end
@@ -144,7 +144,7 @@ module Inflector
   def constantize(camel_cased_word)
     raise NameError, "#{camel_cased_word.inspect} is not a valid constant name!" unless
       camel_cased_word.split("::").all? { |part| /^[A-Z]\w*$/ =~ part }
-    
+
     camel_cased_word = "::#{camel_cased_word}" unless camel_cased_word[0, 2] == '::'
     Object.module_eval(camel_cased_word, __FILE__, __LINE__)
   end
@@ -154,10 +154,14 @@ module Inflector
       "#{number}th"
     else
       case number.to_i % 10
-        when 1: "#{number}st"
-        when 2: "#{number}nd"
-        when 3: "#{number}rd"
-        else    "#{number}th"
+        when 1
+          "#{number}st"
+        when 2
+          "#{number}nd"
+        when 3
+          "#{number}rd"
+        else
+          "#{number}th"
       end
     end
   end
