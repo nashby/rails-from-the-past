@@ -121,12 +121,12 @@ module Rails
           opt.separator ''
           opt.separator 'General Options:'
 
-          opt.on('-p', '--pretend', 'Run but do not make any changes.') { |options[:pretend]| }
+          opt.on('-p', '--pretend', 'Run but do not make any changes.') { |o| o[:pretend] }
           opt.on('-f', '--force', 'Overwrite files that already exist.') { options[:collision] = :force }
           opt.on('-s', '--skip', 'Skip files that already exist.') { options[:collision] = :skip }
-          opt.on('-q', '--quiet', 'Suppress normal output.') { |options[:quiet]| }
-          opt.on('-t', '--backtrace', 'Debugging: show backtrace on errors.') { |options[:backtrace]| }
-          opt.on('-h', '--help', 'Show this help message.') { |options[:help]| }
+          opt.on('-q', '--quiet', 'Suppress normal output.') { |o| o[:quiet] }
+          opt.on('-t', '--backtrace', 'Debugging: show backtrace on errors.') { |o| o[:backtrace] }
+          opt.on('-h', '--help', 'Show this help message.') { |o| o[:help] }
           opt.on('-c', '--svn', 'Modify files with subversion. (Note: svn must be in path)') do
             options[:svn] = `svn status`.inject({}) do |opt, e|
               opt[e.chomp[7..-1]] = true
