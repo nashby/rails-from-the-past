@@ -310,7 +310,7 @@ module ActionView #:nodoc:
 
       def template_exists?(template_path, extension)
         file_path = full_template_path(template_path, extension)
-        @@method_names.has_key?(file_path) || FileTest.exists?(file_path)
+        @@method_names.has_key?(file_path) || FileTest.exist?(file_path)
       end
 
       # This method reads a template file.
@@ -364,7 +364,8 @@ module ActionView #:nodoc:
                  "@controller.headers['Content-Type'] ||= 'text/xml'\n" +
                  template
         else
-          body = ERB.new(template, nil, @@erb_trim_mode).src
+          p @@erb_trim_mode
+          body = ERB.new(template, nil, trim_mode: @@erb_trim_mode).src
         end
 
         @@template_args[render_symbol] ||= {}
