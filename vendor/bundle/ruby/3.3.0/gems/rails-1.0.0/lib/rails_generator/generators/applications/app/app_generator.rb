@@ -1,8 +1,8 @@
 require 'rbconfig'
 
 class AppGenerator < Rails::Generator::Base
-  DEFAULT_SHEBANG = File.join(Config::CONFIG['bindir'],
-                              Config::CONFIG['ruby_install_name'])
+  DEFAULT_SHEBANG = File.join(RbConfig::CONFIG['bindir'],
+                              RbConfig::CONFIG['ruby_install_name'])
   
   default_options   :gem => true, :shebang => DEFAULT_SHEBANG
   mandatory_options :source  => "#{File.dirname(__FILE__)}/../../../../.."
