@@ -92,10 +92,10 @@ class AppGenerator < Rails::Generator::Base
       opt.separator ''
       opt.separator 'Options:'
       opt.on("--ruby [#{DEFAULT_SHEBANG}]",
-             "Path to the Ruby binary of your choice.") { |options[:shebang]| }
+             "Path to the Ruby binary of your choice.") { |o| options[:shebang] = o }
       opt.on("--without-gems",
              "Don't use the Rails gems for your app.",
-             "WARNING: see note below.") { |options[:gem]| }
+             "WARNING: see note below.") { |o| options[:gem] = o }
     end
 
 
