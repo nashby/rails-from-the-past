@@ -364,7 +364,6 @@ module ActionView #:nodoc:
                  "@controller.headers['Content-Type'] ||= 'text/xml'\n" +
                  template
         else
-          p @@erb_trim_mode
           body = ERB.new(template, nil, trim_mode: @@erb_trim_mode).src
         end
 
