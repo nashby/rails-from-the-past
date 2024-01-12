@@ -11,6 +11,10 @@ GEM
     activerecord (1.13.2)
       activesupport (= 1.2.5)
     activesupport (1.2.5)
+    net-protocol (0.2.2)
+      timeout
+    net-smtp (0.4.0.1)
+      net-protocol
     rails (1.0.0)
       actionmailer (= 1.1.5)
       actionpack (= 1.11.2)
@@ -19,6 +23,8 @@ GEM
       activesupport (= 1.2.5)
       rake (>= 0.6.2)
     rake (13.1.0)
+    rexml (3.2.6)
+    timeout (0.4.1)
     webrick (1.8.1)
 
 PLATFORMS
@@ -26,7 +32,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  net-smtp
   rails (= 1.0.0)
+  rexml
   webrick
 
 BUNDLED WITH
